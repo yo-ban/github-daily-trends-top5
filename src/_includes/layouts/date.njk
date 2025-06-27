@@ -6,11 +6,11 @@ layout: base.njk
     <h2 class="page-title">{{ date | dateFormat }} のトレンド</h2>
     <nav class="date-nav">
         {%- if previousDate -%}
-            <a href="/trends/{{ previousDate | dateFormat }}/" class="nav-prev">← 前日</a>
+            <a href="{{ ('/trends/' + (previousDate | dateFormat) + '/') | url }}" class="nav-prev">← 前日</a>
         {%- endif -%}
-        <a href="/" class="nav-home">トップへ</a>
+        <a href="{{ '/' | url }}" class="nav-home">トップへ</a>
         {%- if nextDate -%}
-            <a href="/trends/{{ nextDate | dateFormat }}/" class="nav-next">翌日 →</a>
+            <a href="{{ ('/trends/' + (nextDate | dateFormat) + '/') | url }}" class="nav-next">翌日 →</a>
         {%- endif -%}
     </nav>
 </div>
@@ -31,7 +31,7 @@ layout: base.njk
         <ul class="related-dates">
             {%- for relatedDate in relatedDates -%}
                 <li>
-                    <a href="/trends/{{ relatedDate | dateFormat }}/">
+                    <a href="{{ ('/trends/' + (relatedDate | dateFormat) + '/') | url }}">
                         {{ relatedDate | dateFormat }}
                     </a>
                 </li>

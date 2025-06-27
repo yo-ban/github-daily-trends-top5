@@ -28,14 +28,14 @@ eleventyNavigation:
         <ul class="date-list">
             {%- for date in recentDates -%}
                 <li>
-                    <a href="/trends/{{ date | dateFormat }}/" class="date-link">
+                    <a href="{{ ('/trends/' + (date | dateFormat) + '/') | url }}" class="date-link">
                         {{ date | dateFormat }} ({{ trends.dateRepoCount[date] }}件)
                     </a>
                 </li>
             {%- endfor -%}
         </ul>
         <div class="section-footer">
-            <a href="/archive/" class="btn btn-outline">すべてのアーカイブを見る →</a>
+            <a href="{{ '/archive/' | url }}" class="btn btn-outline">すべてのアーカイブを見る →</a>
         </div>
     </div>
 </section>

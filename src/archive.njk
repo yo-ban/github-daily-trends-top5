@@ -23,7 +23,7 @@ eleventyNavigation:
                             <ul class="archive-list">
                                 {%- for date, trends in dates -%}
                                     <li>
-                                        <a href="/trends/{{ date | dateFormat }}/" class="archive-link">
+                                        <a href="{{ ('/trends/' + (date | dateFormat) + '/') | url }}" class="archive-link">
                                             <span class="archive-date">{{ date | dateFormat }}</span>
                                             <span class="archive-count">({{ trends.length }}件)</span>
                                         </a>

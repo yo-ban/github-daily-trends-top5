@@ -6,8 +6,8 @@ layout: base.njk
     <header class="repo-header">
         <div class="container">
             <nav class="breadcrumb">
-                <a href="/">トップ</a> / 
-                <a href="/trends/{{ date | dateFormat }}/">{{ date | dateFormat }}</a> / 
+                <a href="{{ '/' | url }}">トップ</a> / 
+                <a href="{{ ('/trends/' + (date | dateFormat) + '/') | url }}">{{ date | dateFormat }}</a> / 
                 <span>{{ repo.name }}</span>
             </nav>
             <h2 class="repo-name">{{ repo.name }}</h2>
@@ -45,13 +45,13 @@ layout: base.njk
         <div class="container">
             <nav class="repo-nav">
                 {%- if previousRepo -%}
-                    <a href="/trends/{{ date | dateFormat }}/{{ previousRepo.slug }}/" class="nav-prev">
+                    <a href="{{ ('/trends/' + (date | dateFormat) + '/' + previousRepo.slug + '/') | url }}" class="nav-prev">
                         ← {{ previousRepo.name }}
                     </a>
                 {%- endif -%}
-                <a href="/trends/{{ date | dateFormat }}/" class="nav-list">一覧へ戻る</a>
+                <a href="{{ ('/trends/' + (date | dateFormat) + '/') | url }}" class="nav-list">一覧へ戻る</a>
                 {%- if nextRepo -%}
-                    <a href="/trends/{{ date | dateFormat }}/{{ nextRepo.slug }}/" class="nav-next">
+                    <a href="{{ ('/trends/' + (date | dateFormat) + '/' + nextRepo.slug + '/') | url }}" class="nav-next">
                         {{ nextRepo.name }} →
                     </a>
                 {%- endif -%}

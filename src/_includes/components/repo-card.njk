@@ -2,7 +2,7 @@
     <div class="repo-rank">#{{ repo.rank }}</div>
     <div class="repo-content">
         <h3 class="repo-title">
-            <a href="/trends/{{ date | dateFormat }}/{{ repo.slug }}/">{{ repo.name }}</a>
+            <a href="{{ ('/trends/' + (date | dateFormat) + '/' + repo.slug + '/') | url }}">{{ repo.name }}</a>
         </h3>
         <div class="repo-meta">
             <span class="repo-stars">⭐ {{ repo.stars | numberFormat }}</span>
@@ -10,7 +10,7 @@
         </div>
         <p class="repo-summary">{{ repo.summary }}</p>
         <div class="repo-actions">
-            <a href="/trends/{{ date | dateFormat }}/{{ repo.slug }}/" class="btn btn-primary">詳細を見る →</a>
+            <a href="{{ ('/trends/' + (date | dateFormat) + '/' + repo.slug + '/') | url }}" class="btn btn-primary">詳細を見る →</a>
             <a href="https://github.com/{{ repo.name }}" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
         </div>
     </div>

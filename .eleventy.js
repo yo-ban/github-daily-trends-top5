@@ -34,6 +34,7 @@ module.exports = function(eleventyConfig) {
     return num?.toLocaleString() || '0';
   });
 
+
   // コレクション: 日付別にグループ化
   eleventyConfig.addCollection("trendsByDate", function(collectionApi) {
     const trends = collectionApi.getFilteredByTag("trend");
@@ -96,6 +97,7 @@ module.exports = function(eleventyConfig) {
     },
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
-    dataTemplateEngine: "njk"
+    dataTemplateEngine: "njk",
+    pathPrefix: process.env.PATH_PREFIX || ""
   };
 };
