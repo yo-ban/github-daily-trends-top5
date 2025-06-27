@@ -1,0 +1,41 @@
+---
+layout: base.njk
+title: 今日のGitHubトレンド
+eleventyNavigation:
+  key: Home
+  order: 1
+---
+
+<div class="hero">
+    <h2 class="hero-title">今日のGitHubトレンドリポジトリ</h2>
+    <p class="hero-date">{{ latestDate | dateFormat }}</p>
+</div>
+
+<section class="trends-section">
+    <div class="container">
+        <div class="repo-list">
+            {%- for repo in latestTrends -%}
+                {% set date = latestDate %}
+                {% include "components/repo-card.njk" %}
+            {%- endfor -%}
+        </div>
+    </div>
+</section>
+
+<section class="recent-section">
+    <div class="container">
+        <h2 class="section-title">過去7日間のトレンド</h2>
+        <ul class="date-list">
+            {%- for date in recentDates -%}
+                <li>
+                    <a href="/trends/{{ date | dateFormat }}/" class="date-link">
+                        {{ date | dateFormat }} ({{ trends.dateRepoCount[date] }}件)
+                    </a>
+                </li>
+            {%- endfor -%}
+        </ul>
+        <div class="section-footer">
+            <a href="/archive/" class="btn btn-outline">すべてのアーカイブを見る →</a>
+        </div>
+    </div>
+</section>

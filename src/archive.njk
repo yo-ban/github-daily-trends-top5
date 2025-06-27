@@ -1,0 +1,39 @@
+---
+layout: base.njk
+title: アーカイブ
+eleventyNavigation:
+  key: Archive
+  order: 2
+---
+
+<div class="page-header">
+    <h2 class="page-title">トレンドアーカイブ</h2>
+    <p class="page-description">過去のGitHubトレンドリポジトリ一覧</p>
+</div>
+
+<section class="archive-section">
+    <div class="container">
+        <div class="archive-grid">
+            {%- for year, months in collections.archiveByYear -%}
+                <div class="archive-year">
+                    <h3 class="year-title">{{ year }}年</h3>
+                    {%- for month, dates in months -%}
+                        <div class="archive-month">
+                            <h4 class="month-title">{{ month }}月</h4>
+                            <ul class="archive-list">
+                                {%- for date, trends in dates -%}
+                                    <li>
+                                        <a href="/trends/{{ date | dateFormat }}/" class="archive-link">
+                                            <span class="archive-date">{{ date | dateFormat }}</span>
+                                            <span class="archive-count">({{ trends.length }}件)</span>
+                                        </a>
+                                    </li>
+                                {%- endfor -%}
+                            </ul>
+                        </div>
+                    {%- endfor -%}
+                </div>
+            {%- endfor -%}
+        </div>
+    </div>
+</section>

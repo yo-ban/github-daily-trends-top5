@@ -1,0 +1,61 @@
+---
+layout: base.njk
+---
+
+<article class="repo-detail">
+    <header class="repo-header">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="/">トップ</a> / 
+                <a href="/trends/{{ date | dateFormat }}/">{{ date | dateFormat }}</a> / 
+                <span>{{ repo.name }}</span>
+            </nav>
+            <h2 class="repo-name">{{ repo.name }}</h2>
+            <div class="repo-meta-detail">
+                <span class="meta-item">⭐ {{ repo.stars | numberFormat }}</span>
+                <span class="meta-item">🍴 {{ repo.forks | numberFormat }}</span>
+                <span class="meta-item">{{ repo.language }}</span>
+                {%- if repo.license -%}
+                <span class="meta-item">📄 {{ repo.license }}</span>
+                {%- endif -%}
+                <a href="https://github.com/{{ repo.name }}" target="_blank" rel="noopener" class="github-link">
+                    GitHubで見る →
+                </a>
+            </div>
+            {%- if repo.features and repo.features.length > 0 -%}
+            <div class="repo-features">
+                <h3>主な特徴</h3>
+                <ul>
+                    {%- for feature in repo.features -%}
+                    <li>{{ feature }}</li>
+                    {%- endfor -%}
+                </ul>
+            </div>
+            {%- endif -%}
+        </div>
+    </header>
+
+    <div class="repo-body">
+        <div class="container">
+            {{ content | safe }}
+        </div>
+    </div>
+
+    <footer class="repo-footer">
+        <div class="container">
+            <nav class="repo-nav">
+                {%- if previousRepo -%}
+                    <a href="/trends/{{ date | dateFormat }}/{{ previousRepo.slug }}/" class="nav-prev">
+                        ← {{ previousRepo.name }}
+                    </a>
+                {%- endif -%}
+                <a href="/trends/{{ date | dateFormat }}/" class="nav-list">一覧へ戻る</a>
+                {%- if nextRepo -%}
+                    <a href="/trends/{{ date | dateFormat }}/{{ nextRepo.slug }}/" class="nav-next">
+                        {{ nextRepo.name }} →
+                    </a>
+                {%- endif -%}
+            </nav>
+        </div>
+    </footer>
+</article>

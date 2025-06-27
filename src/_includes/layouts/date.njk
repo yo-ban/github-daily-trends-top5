@@ -1,0 +1,41 @@
+---
+layout: base.njk
+---
+
+<div class="page-header">
+    <h2 class="page-title">{{ date | dateFormat }} のトレンド</h2>
+    <nav class="date-nav">
+        {%- if previousDate -%}
+            <a href="/trends/{{ previousDate | dateFormat }}/" class="nav-prev">← 前日</a>
+        {%- endif -%}
+        <a href="/" class="nav-home">トップへ</a>
+        {%- if nextDate -%}
+            <a href="/trends/{{ nextDate | dateFormat }}/" class="nav-next">翌日 →</a>
+        {%- endif -%}
+    </nav>
+</div>
+
+<section class="trends-section">
+    <div class="container">
+        <div class="repo-list">
+            {%- for repo in repos -%}
+                {% include "components/repo-card.njk" %}
+            {%- endfor -%}
+        </div>
+    </div>
+</section>
+
+<section class="related-section">
+    <div class="container">
+        <h3 class="section-title">他の日のトレンド</h3>
+        <ul class="related-dates">
+            {%- for relatedDate in relatedDates -%}
+                <li>
+                    <a href="/trends/{{ relatedDate | dateFormat }}/">
+                        {{ relatedDate | dateFormat }}
+                    </a>
+                </li>
+            {%- endfor -%}
+        </ul>
+    </div>
+</section>
