@@ -40,13 +40,14 @@ jobs:
       run: npm ci
     
     - name: サイトビルド
-      env:
-        PATH_PREFIX: "/${{ github.event.repository.name }}/"
+      # env:
+      #   PATH_PREFIX: "/${{ github.event.repository.name }}/"
       run: |
         # dataディレクトリの解析結果を使用してデータ生成
         node scripts/generate-site-data.js
         # 11tyでビルド（GitHub Pages用のpathprefixを設定）
-        npx eleventy --pathprefix="/${{ github.event.repository.name }}/"
+        npx eleventy 
+        # --pathprefix="/${{ github.event.repository.name }}/"
     
     - name: GitHub Pages アーティファクトアップロード
       uses: actions/upload-pages-artifact@v3
