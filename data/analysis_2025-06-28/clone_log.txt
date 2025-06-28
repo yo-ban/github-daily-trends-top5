@@ -1,0 +1,6 @@
+すべてのリポジトリが既にクローン済みです：
+- ✓ ottomator-agents
+- ✓ awesome  
+- ✓ gitleaks
+- ✓ twenty
+- ✓ flux
