@@ -97,21 +97,21 @@ function parseRepoMarkdown(content, filename) {
     }
     
     // 一言で言うとを抽出（新フォーマット対応）
-    const oneLinerMatch = content.match(/### 一言で言うと\n+(.+?)(?=\n###|\n##|\n*$)/s);
+    const oneLinerMatch = content.match(/### 一言で言うと\r?\n+(.+?)(?=\r?\n###|\r?\n##|\r?\n*$)/s);
     if (oneLinerMatch) {
         repo.summary = oneLinerMatch[1].trim();
     } else {
         // 旧フォーマット対応
-        const summaryMatch = content.match(/## 概要\n+(.+?)(?=\n##|\n*$)/s);
+        const summaryMatch = content.match(/## 概要\r?\n+(.+?)(?=\r?\n##|\r?\n*$)/s);
         if (summaryMatch) {
-            repo.summary = summaryMatch[1].trim().split('\n')[0];
+            repo.summary = summaryMatch[1].trim().split(/\r?\n/)[0];
         }
     }
     
     // 主な特徴を抽出
-    const featuresMatch = content.match(/### 主な特徴\n+((?:- .+\n?)+)/);
+    const featuresMatch = content.match(/### 主な特徴\r?\n+((?:- .+\r?\n?)+)/);
     if (featuresMatch) {
-        repo.features = featuresMatch[1].trim().split('\n').map(f => f.replace(/^- /, ''));
+        repo.features = featuresMatch[1].trim().split(/\r?\n/).map(f => f.replace(/^- /, ''));
     }
     
     return repo;
