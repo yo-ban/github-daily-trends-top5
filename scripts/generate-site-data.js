@@ -141,7 +141,7 @@ async function generateDatePage(date, repos, siteRoot) {
     
     const content = `---
 layout: ${frontmatter.layout}
-title: "${frontmatter.title}"
+title: ${JSON.stringify(frontmatter.title)}
 date: ${frontmatter.date}
 repos: ${JSON.stringify(frontmatter.repos, null, 2)}
 tags:
@@ -179,18 +179,18 @@ async function generateRepoPage(date, repo, siteRoot) {
     
     const content = `---
 layout: ${frontmatter.layout}
-title: "${frontmatter.title}"
+title: ${JSON.stringify(frontmatter.title)}
 date: ${frontmatter.date}
 repo:
   rank: ${frontmatter.repo.rank}
-  name: "${frontmatter.repo.name}"
-  slug: "${frontmatter.repo.slug}"
+  name: ${JSON.stringify(frontmatter.repo.name)}
+  slug: ${JSON.stringify(frontmatter.repo.slug)}
   stars: ${frontmatter.repo.stars}
-  language: "${frontmatter.repo.language}"
+  language: ${JSON.stringify(frontmatter.repo.language)}
   forks: ${frontmatter.repo.forks}
-  license: ${frontmatter.repo.license ? `"${frontmatter.repo.license}"` : 'null'}
+  license: ${frontmatter.repo.license ? JSON.stringify(frontmatter.repo.license) : 'null'}
   features:
-${frontmatter.repo.features.map(f => `    - "${f}"`).join('\n') || '    []'}
+${frontmatter.repo.features.map(f => `    - ${JSON.stringify(f)}`).join('\n') || '    []'}
 tags:
 ${frontmatter.tags.map(tag => `  - ${tag}`).join('\n')}
 ---

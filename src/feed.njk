@@ -1,0 +1,50 @@
+---
+permalink: feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="{{ site.url }}">
+  <title>{{ site.title }}</title>
+  <subtitle>{{ site.description }}</subtitle>
+  <link href="{{ site.url }}feed.xml" rel="self"/>
+  <link href="{{ site.url }}"/>
+  <updated>{{ "now" | toISOString }}</updated>
+  <id>{{ site.url }}</id>
+  <author>
+    <name>{{ site.author }}</name>
+  </author>
+  {%- for repo in collections.repo | reverse | limit(30) %}
+  {%- set absoluteRepoUrl = site.url | trim('/') + repo.url %}
+  <entry>
+    <title>{{ repo.data.repo.name }} - {{ repo.data.date | dateFormat }}</title>
+    <link href="{{ absoluteRepoUrl }}"/>
+    <updated>{{ repo.data.date | toISOString }}</updated>
+    <id>{{ absoluteRepoUrl }}</id>
+    <content type="html">
+      <![CDATA[
+        <h2>{{ repo.data.repo.name }}</h2>
+        <p><strong>ランク:</strong> #{{ repo.data.repo.rank }}</p>
+        <p><strong>スター数:</strong> {{ repo.data.repo.stars | numberFormat }}</p>
+        <p><strong>フォーク数:</strong> {{ repo.data.repo.forks | numberFormat }}</p>
+        <p><strong>言語:</strong> {{ repo.data.repo.language }}</p>
+        {%- if repo.data.repo.license %}
+        <p><strong>ライセンス:</strong> {{ repo.data.repo.license }}</p>
+        {%- endif %}
+        {%- if repo.data.repo.features and repo.data.repo.features.length > 0 %}
+        <h3>主な特徴</h3>
+        <ul>
+          {%- for feature in repo.data.repo.features %}
+          <li>{{ feature | safe }}</li>
+          {%- endfor %}
+        </ul>
+        {%- endif %}
+        <p><a href="{{ site.url | trim('/') }}{{ repo.url }}">詳細を読む →</a></p>
+      ]]>
+    </content>
+    {%- if repo.data.repo.language %}
+    <category term="{{ repo.data.repo.language }}"/>
+    {%- endif %}
+    <category term="rank-{{ repo.data.repo.rank }}"/>
+  </entry>
+  {%- endfor %}
+</feed>

@@ -34,6 +34,28 @@ module.exports = function(eleventyConfig) {
     return num?.toLocaleString() || '0';
   });
 
+  // ISO 8601形式の日付フィルター（RSS用）
+  eleventyConfig.addFilter("toISOString", (date) => {
+    if (date === "now") {
+      return new Date().toISOString();
+    }
+    return new Date(date).toISOString();
+  });
+
+  // 配列の件数制限フィルター
+  eleventyConfig.addFilter("limit", (array, limit) => {
+    if (!array) return [];
+    return array.slice(0, limit);
+  });
+
+  // 文字列の前後から特定文字を削除
+  eleventyConfig.addFilter("trim", (str, char = ' ') => {
+    if (!str) return '';
+    const escapedChar = char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const pattern = new RegExp(`^${escapedChar}+|${escapedChar}+$`, 'g');
+    return str.replace(pattern, '');
+  });
+
 
   // コレクション: 日付別にグループ化
   eleventyConfig.addCollection("trendsByDate", function(collectionApi) {
