@@ -177,6 +177,10 @@ async function generateRepoPage(date, repo, siteRoot) {
         tags: ['repo', `lang-${repo.language?.toLowerCase() || 'unknown'}`]
     };
     
+    // Nunjucksテンプレート構文を含む可能性がある部分を処理
+    // より安全なアプローチ：コンテンツ全体をrawブロックで囲む
+    const escapedContent = '{% raw %}\n' + repo.content + '\n{% endraw %}';
+    
     const content = `---
 layout: ${frontmatter.layout}
 title: ${JSON.stringify(frontmatter.title)}
@@ -195,7 +199,7 @@ tags:
 ${frontmatter.tags.map(tag => `  - ${tag}`).join('\n')}
 ---
 
-${repo.content}`;
+${escapedContent}`;
     
     await fs.writeFile(path.join(repoDir, 'index.md'), content);
 }
