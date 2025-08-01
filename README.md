@@ -1,6 +1,6 @@
-# GitHub Daily Trends サイト
+# GitHub Trends サイト
 
-GitHubのトレンドリポジトリを日次で自動公開するWebサイトシステム
+GitHubのトレンドリポジトリの解説を一定サイクルで自動生成するWebサイトシステム
 
 ## 🚀 クイックスタート
 

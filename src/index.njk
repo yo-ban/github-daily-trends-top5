@@ -1,14 +1,14 @@
 ---
 layout: base.njk
-title: 今日のGitHubトレンド
+title: 今週のGitHubトレンド
 eleventyNavigation:
   key: Home
   order: 1
 ---
 
 <div class="hero">
-    <h2 class="hero-title">今日のGitHubトレンドリポジトリ</h2>
-    <p class="hero-description">毎日GitHubで最も注目を集めている上位5件のリポジトリを、技術的な価値や実用性の観点から詳しく解説します</p>
+    <h2 class="hero-title">今週のGitHubトレンドリポジトリ</h2>
+    <p class="hero-description">GitHubで最も注目を集めている上位数件のリポジトリを、技術的な価値や実用性の観点から詳しく解説します</p>
     <p class="hero-date">{{ latestDate | dateFormat }}</p>
 </div>
 
@@ -25,7 +25,7 @@ eleventyNavigation:
 
 <section class="recent-section">
     <div class="container">
-        <h2 class="section-title">過去7日間のトレンド</h2>
+        <h2 class="section-title">過去のトレンド</h2>
         <ul class="date-list">
             {%- for date in recentDates -%}
                 <li>
